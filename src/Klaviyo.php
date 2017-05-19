@@ -61,7 +61,14 @@ class Klaviyo {
 
     protected function make_request($path, $params) {
         $url = $this->host . $path . '?' . $params;
-        $response = file_get_contents($url);
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_RETURNTRANSFER => 1,
+            CURLOPT_URL => $url,
+            CURLOPT_TIMEOUT => 5 // seconds
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
         return $response == '1';
     }
 };
