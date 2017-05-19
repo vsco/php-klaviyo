@@ -68,6 +68,7 @@ class Klaviyo {
             CURLOPT_TIMEOUT => 5 // seconds
         ));
         $response = curl_exec();
+        curl_close();
         return $response == '1';
     }
 };
